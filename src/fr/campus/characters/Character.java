@@ -1,39 +1,74 @@
 package fr.campus.characters;
 
-public class Character {
-    private String name;
-    private int health;
-    private int level;
-    private String classType;
-    private int attackPoints;
+import fr.campus.equipments.OffensiveEquipment;
+import fr.campus.equipments.DefensiveEquipment;
+import fr.campus.equipments.Weapon;
+import fr.campus.equipments.Spell;
+import fr.campus.equipments.Shield;
+import fr.campus.equipments.Potion;
+import fr.campus.Menu;
+
+import static fr.campus.Menu.displayMessage;
+
+public abstract class Character {
+    protected String name;
+    protected int health;
+    protected int level;
+    protected int attackPoints;
+    protected OffensiveEquipment offensiveEquipment;
+    protected DefensiveEquipment defensiveEquipment
 
     // Constructeur
-    public Character(String name, String classType) {
+    public Character(String name) {
         this.name = name;
-        this.classType = classType;
         this.level = 1;
-
-        if (classType.equals("Warrior")) {
-            this.health = 10;
-            this.attackPoints = 5;
-
-        } else if (classType.equals("Wizard")) {
-            this.health = 6;
-            this.attackPoints = 8;
-        }
+        initializeEquipment();
     }
+
+    public abstract void initializeEquipment();
+
+    public abstract void attack();
+
+    public abstract void applyLevelBonus();
+
+    public void levelUp() {
+        this.level++;
+        displayMessage(name + " passe au niveau " + level + " !");
+        applyLevelBonus();
+    }
+
+    /**public void sufferDamage(int damage) {
+        int defense = (DefensiveEquipment != null) ? DefensiveEquipment.getDefenseLevel() : 0;
+        int realDamage = Math.max(0, damage - defense);
+
+        this.health -= realDamage;
+        if (health < 0) {
+            this.health = 0;
+        }
+        displayMessage(name + " subit " + realDamage + " dégats ! PV restants: " + health);
+    }*/
+
+    public int getTotalAttack() {
+       //int equipmentAttack = (offensiveEquipment != null) ? offensiveEquipment.getAttackLevel() : 0;
+        // return this.attackPoints + equipmentAttack;
+    }
+
+    public boolean isAlive() {
+        return this.health > 0;
+    }
+
+    // ===== GETTERS ET SETTERS =====
 
     // toString
     @Override
     public String toString() {
-        return "Personnage{nom='" + name + "', PV=" + health + ", niveau=" + level + ", classe=" + classType + ", points d'attaque=" + attackPoints + "}";
+        return "Personnage : " + name + " (Niveau " + level + ", " + health + " PV, " + getTotalAttack() + " ATQ totale";
     }
 
     //Getters
     public String getName() { return name; }
     public int getHealth() { return health; }
     public int getLevel() { return level; }
-    public String getClassType() { return classType; }
     public int getAttackPoints() { return attackPoints; }
 
     //Setters
@@ -49,10 +84,6 @@ public class Character {
         if (level >= 0) {
             this.level = level;
         }
-    }
-
-    public void setClassType(String classType) {
-        this.classType = classType;
     }
 
     public void setAttackPoints(int attackPoints) {
