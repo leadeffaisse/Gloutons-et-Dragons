@@ -16,14 +16,16 @@ public abstract class Character {
     protected int level;
     protected int attackPoints;
     protected OffensiveEquipment offensiveEquipment;
-    protected DefensiveEquipment defensiveEquipment
+    protected DefensiveEquipment defensiveEquipment;
 
-    // Constructeur
+    // ===== Constructeur =====
     public Character(String name) {
         this.name = name;
         this.level = 1;
         initializeEquipment();
     }
+
+    // ===== Méthodes abstraites =====
 
     public abstract void initializeEquipment();
 
@@ -31,22 +33,24 @@ public abstract class Character {
 
     public abstract void applyLevelBonus();
 
+    // ===== Méthodes =====
+
     public void levelUp() {
         this.level++;
         displayMessage(name + " passe au niveau " + level + " !");
         applyLevelBonus();
     }
 
-    /**public void sufferDamage(int damage) {
-        int defense = (DefensiveEquipment != null) ? DefensiveEquipment.getDefenseLevel() : 0;
+    public void sufferDamage(int damage) {
+        /**int defense = (DefensiveEquipment != null) ? DefensiveEquipment.getDefenseLevel() : 0;
         int realDamage = Math.max(0, damage - defense);
 
         this.health -= realDamage;
-        if (health < 0) {
+        if (this.health < 0) {
             this.health = 0;
         }
-        displayMessage(name + " subit " + realDamage + " dégats ! PV restants: " + health);
-    }*/
+        displayMessage(name + " subit " + realDamage + " dégats ! PV restants: " + health);*/
+    }
 
     public int getTotalAttack() {
        //int equipmentAttack = (offensiveEquipment != null) ? offensiveEquipment.getAttackLevel() : 0;
@@ -62,7 +66,7 @@ public abstract class Character {
     // toString
     @Override
     public String toString() {
-        return "Personnage : " + name + " (Niveau " + level + ", " + health + " PV, " + getTotalAttack() + " ATQ totale";
+        return "Personnage : " + name + " (Niveau " + level + ", " + health + " PV, " + getTotalAttack() + " ATQ totale.";
     }
 
     //Getters
@@ -70,25 +74,30 @@ public abstract class Character {
     public int getHealth() { return health; }
     public int getLevel() { return level; }
     public int getAttackPoints() { return attackPoints; }
+	 public OffensiveEquipment getOffensiveEquipment() { return offensiveEquipment; }
+	 public DefensiveEquipment getDefensiveEquipment() { return defensiveEquipment; }
 
     //Setters
     public void setName(String name) { this.name = name; }
 
     public void setHealth(int health) {
-        if (health >= 0) {
-            this.health = health;
-        }
+        if (health >= 0) this.health = health;
     }
 
     public void setLevel(int level) {
-        if (level >= 0) {
-            this.level = level;
-        }
+        if (level >= 1) this.level = level;
     }
 
     public void setAttackPoints(int attackPoints) {
-        if (attackPoints >= 0) {
-            this.attackPoints = attackPoints;
-        }
+        if (attackPoints >= 0) this.attackPoints = attackPoints;
     }
+
+	 public void setOffensiveEquipment(OffensiveEquipment equipment) {
+	 this.offensiveEquipment = equipment;
+	 }
+	 
+	 public void setDefensiveEquipment(DefensiveEquipment equipment) {
+	 this.defensiveEquipment = equipment;
+	 }
+	
 }
