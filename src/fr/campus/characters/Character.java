@@ -2,12 +2,6 @@ package fr.campus.characters;
 
 import fr.campus.equipments.OffensiveEquipment;
 import fr.campus.equipments.DefensiveEquipment;
-import fr.campus.equipments.Weapon;
-import fr.campus.equipments.Spell;
-import fr.campus.equipments.Shield;
-import fr.campus.equipments.Potion;
-import fr.campus.Menu;
-
 import static fr.campus.Menu.displayMessage;
 
 public abstract class Character {
@@ -15,6 +9,7 @@ public abstract class Character {
     protected int health;
     protected int level;
     protected int attackPoints;
+    protected int defense;
     protected OffensiveEquipment offensiveEquipment;
     protected DefensiveEquipment defensiveEquipment;
 
@@ -42,26 +37,29 @@ public abstract class Character {
     }
 
     public void sufferDamage(int damage) {
-        /**int defense = (DefensiveEquipment != null) ? DefensiveEquipment.getDefenseLevel() : 0;
-        int realDamage = Math.max(0, damage - defense);
+        int equipmentDefense = (defensiveEquipment != null) ? defensiveEquipment.getDefenseLevel() : 0;
+        int totalDefense = equipmentDefense + getDefense();
+        int realDamage = Math.max(0, damage - totalDefense);
 
         this.health -= realDamage;
         if (this.health < 0) {
             this.health = 0;
         }
-        displayMessage(name + " subit " + realDamage + " dégats ! PV restants: " + health);*/
+         displayMessage(name + " bloque une partie des dégâts ! (Défense : " + totalDefense + ")");
+         displayMessage("Dégâts subis : " + realDamage + ", PV restants : " + health);
     }
 
+    // ===== GETTERS ET SETTERS =====
+
+
     public int getTotalAttack() {
-       //int equipmentAttack = (offensiveEquipment != null) ? offensiveEquipment.getAttackLevel() : 0;
-        // return this.attackPoints + equipmentAttack;
+       int equipmentAttack = (offensiveEquipment != null) ? offensiveEquipment.getAttackLevel() : 0;
+       return this.attackPoints + equipmentAttack;
     }
 
     public boolean isAlive() {
         return this.health > 0;
     }
-
-    // ===== GETTERS ET SETTERS =====
 
     // toString
     @Override
@@ -74,8 +72,9 @@ public abstract class Character {
     public int getHealth() { return health; }
     public int getLevel() { return level; }
     public int getAttackPoints() { return attackPoints; }
-	 public OffensiveEquipment getOffensiveEquipment() { return offensiveEquipment; }
-	 public DefensiveEquipment getDefensiveEquipment() { return defensiveEquipment; }
+    private int getDefense() { return this.defense; }
+    public OffensiveEquipment getOffensiveEquipment() { return offensiveEquipment; }
+    public DefensiveEquipment getDefensiveEquipment() { return defensiveEquipment; }
 
     //Setters
     public void setName(String name) { this.name = name; }

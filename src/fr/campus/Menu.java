@@ -3,6 +3,8 @@ package fr.campus;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import fr.campus.characters.Character;
+import fr.campus.characters.Warrior;
+import fr.campus.characters.Wizard;
 
 public class Menu {
     private final Scanner clavier;
@@ -41,7 +43,7 @@ public class Menu {
             switch (choice) {
                 case 1:
                     currentCharacter = createCharacter();
-                    game = new Game(currentCharacter);
+                    game.setPlayer(currentCharacter);
                     break;
                 case 2:
                     if (currentCharacter != null) {
@@ -59,7 +61,7 @@ public class Menu {
                     break;
                 case 3:
                     if (currentCharacter != null) {
-                        displayMessage("\n Informations du personnage");
+                        displayMessage("\n ===== Informations du personnage =====");
                         displayMessage(currentCharacter.toString());
                     } else {
                         displayMessage("Aucun personnage créé.");
@@ -76,7 +78,6 @@ public class Menu {
 
     private Character createCharacter() {
         String name = "";
-        String classType = "";
 
         displayMessage("\n+===== Création du personnage =====+");
         while (name.trim().isEmpty()) {
@@ -93,13 +94,11 @@ public class Menu {
 
         int choice = secureChoiceEntry(1, 2);
 
-        classType = switch (choice) {
-            case 1 -> "Warrior";
-            case 2 -> "Wizard";
-            default -> classType;
+        Character character = switch (choice) {
+            case 1 -> new Warrior(name);
+            case 2 -> new Wizard(name);
+            default -> null;
         };
-
-        Character character = new Character(name, classType);
 
         displayMessage("\n Personnage créé avec succès !");
         displayMessage(character.toString());

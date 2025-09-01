@@ -1,6 +1,11 @@
 package fr.campus.characters;
 
 
+import fr.campus.equipments.Potion;
+import fr.campus.equipments.Spell;
+
+import static fr.campus.Menu.displayMessage;
+
 public class Wizard extends Character {
 
 	 // ===== Constructeur =====
@@ -29,22 +34,12 @@ public class Wizard extends Character {
 	 this.defense += 1;
 	 displayMessage("Bonus de montée de niveau : +3 PV, +4 attaque, +1 défense");
 	 }
-	
-	 @Override // dans classe parente + corriger defense
-	 public void sufferDamage(int damage) {
-	 int defenseEquipment = (defensiveEquipment != null) ? defensiveEquipment.getDefenseLevel() : 0;
-	 int totalDefense = defenseEquipment + defense;
-	 int realDamage = Math.max(0, damage - totalDefense);
-	
-	 this.health -= realDamage;
-	 displayMessage(name + " bloque une partie des dégâts ! (Défense : " + totalDefense + ")");
-	 displayMessage("Dégâts subis : " + realDamage + ", PV restants : " + health);
-	 }
+
 	 // Getter
 	 public int getDefense() { return defense; }
 	 // 
 	 @Override
 	 public String toString() {
-	 return "Personnage : " + name + ", niveau de vie : " + health + ", attaque : " + attackPoints + ", défense : " + defense + "niveau : " + level + ", équipement : " + (offensiveEquipment != null ? offensiveEquipment.getName() : "Aucun") + (defensiveEquipment != null ? defendiveEquipment.getName() : "Aucun");
+	 return "Personnage : " + name + ", niveau de vie : " + health + ", attaque : " + attackPoints + ", défense : " + defense + "niveau : " + level + ", équipement : " + (offensiveEquipment != null ? offensiveEquipment.getName() : "Aucun") + (defensiveEquipment != null ? defensiveEquipment.getName() : "Aucun");
 	}
 }
