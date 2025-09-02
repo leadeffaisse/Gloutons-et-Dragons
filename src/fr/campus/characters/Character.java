@@ -49,6 +49,11 @@ public abstract class Character {
          displayMessage("Dégâts subis : " + realDamage + ", PV restants : " + health);
     }
 
+    public int heal(int potion) {
+        this.health += potion;
+        return potion;
+    }
+
     // ===== GETTERS ET SETTERS =====
 
 

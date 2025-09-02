@@ -99,6 +99,8 @@ public class Menu {
             case 2 -> new Wizard(name);
             default -> null;
         };
+        assert character != null;
+        character.initializeEquipment();
 
         displayMessage("\n Personnage créé avec succès !");
         displayMessage(character.toString());
