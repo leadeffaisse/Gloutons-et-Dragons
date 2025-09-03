@@ -5,6 +5,9 @@ import fr.campus.cells.EnemyCell;
 import fr.campus.cells.PotionCell;
 import fr.campus.cells.WeaponCell;
 import fr.campus.characters.Character;
+import fr.campus.equipments.Potion;
+import fr.campus.equipments.Weapon;
+
 import java.util.Random;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -63,17 +66,23 @@ public class Game {
     }
 
     private WeaponCell createWeaponCell() {
-        String[] weaponTypes = {"épée", "hâche", "marteau", "arc", "lance"};
-        String weaponType = weaponTypes[dice.nextInt(weaponTypes.length)];
+        String[] weaponNames = {"épée", "hâche", "marteau", "arc", "lance"};
+        String weaponName = weaponNames[dice.nextInt(weaponNames.length)];
         int damage = 2 + dice.nextInt(6);
 
-        return new WeaponCell(weaponType, damage);
+        Weapon weapon = new Weapon(weaponName, damage);
+
+        return new WeaponCell(weapon);
     }
 
     private PotionCell createPotionCell() {
-        int health = 3 + dice.nextInt(8);
+        String[] potionNames = {"Potion de soin", "Elixir de vie", "Philtre de régénération", "Potion magique", "Remède naturel"};
+        String potionName = potionNames[dice.nextInt(potionNames.length)];
+        int healing = 3 + dice.nextInt(8);
 
-        return new PotionCell(health);
+        Potion potion = new Potion(potionName, healing);
+
+        return new PotionCell(potion);
     }
 
     // ===== Logique du jeu =====
@@ -85,20 +94,34 @@ public class Game {
 
         displayMessage("\n===== Début de l'aventure =====");
         displayMessage("Votre personnage " + player.getName() + " commence l'aventure !");
-        int boardSize = 64;
-        displayMessage("Position actuelle : case " + playerPosition + "/" + boardSize);
+        displayMessage("Position actuelle : case " + playerPosition + "/" + BOARD_SIZE);
 
-        while (playerPosition < boardSize && player.isAlive()) {
+        while (playerPosition < BOARD_SIZE && player.isAlive()) {
             displayMessage("\nAppuyez sur Entrée pour lancer le dé...");
             scanner.nextLine();
 
             playTurn();
         }
-        if (playerPosition >= boardSize) {
+
+        if (playerPosition >= BOARD_SIZE) {
             displayMessage("\nFélicitation ! Vous avez terminé la partie !");
         } else {
             displayMessage("\nVotre personnage est mort. Fin de la partie.");
         }
+    }
+
+    // Le joueur joue son tour
+    public void playTurn() {
+        int diceRoll = rollDice();
+        displayMessage("Vous avez fait un " + diceRoll + " !");
+        playerPosition += diceRoll;
+
+        if (playerPosition > BOARD_SIZE) {
+            playerPosition = BOARD_SIZE;
+        }
+
+        displayMessage(player.getName() + "se déplace à la case " + playerPosition);
+        interactWithCell(playerPosition);
     }
 
     private void interactWithCell(int playerPosition) {
@@ -129,7 +152,6 @@ public class Game {
                 int enemyDamage = enemyCell.attack();
                 displayMessage(enemyCell.getEnemyType() + " vous attaque et inflige " + enemyDamage + " dégâtes !");
                 player.sufferDamage(enemyDamage);
-                displayMessage("Il vous reste " + player.getHealth() + " PV.");
             } else {
                 displayMessage("Vous avez vaincu l'ennemi !");
                 break;
@@ -138,23 +160,19 @@ public class Game {
     }
 
     private void handleWeaponCell(WeaponCell weaponCell) {
-        displayMessage("Trésor trouvé!");
-        displayMessage("Vous prenez " + weaponCell.getWeaponType() + " !");
-        displayMessage("Cette arme inflige : " + weaponCell.getDamage() + " dégâts !");
-
-        weaponCell.emptyCell();
+        displayMessage("Vous équipez cette nouvelle arme.");
+        Weapon weapon = weaponCell.takeWeapon();
+        player.setOffensiveEquipment(weapon);
     }
 
     private void handlePotionCell(PotionCell potionCell) {
-        displayMessage("Potion découverte !");
+        displayMessage("Vous utilisez la potion.");
         int oldHealth = player.getHealth();
         player.heal(potionCell.getHealthPoints());
         int newHealth = player.getHealth();
 
         displayMessage("Vous récupérez " + (newHealth - oldHealth) + " PV !");
         displayMessage("PV actuels : " + newHealth);
-
-        potionCell.emptyCell();
     }
 
     private int rollDice() {
@@ -165,16 +183,7 @@ public class Game {
         this.playerPosition = 1;
     }
 
-    public void playTurn() {
-        int diceRoll = rollDice();
-        displayMessage("Vous avez fait un " + diceRoll + " !");
-        playerPosition += diceRoll;
-        if (playerPosition > BOARD_SIZE) {
-            playerPosition = BOARD_SIZE;
-        }
-        displayMessage("Nouvelle position : case " + playerPosition);
-        interactWithCell(playerPosition);
-    }
+
 
     // Getters et setters
     public Character getPlayer() { return player; }

@@ -1,41 +1,52 @@
 package fr.campus.cells;
 
+import fr.campus.equipments.Weapon;
+
 public class WeaponCell extends Cell {
-    private int damage;
-    private String weaponType;
+    private Weapon weapon;
+    private boolean isTaken;
 
-    public WeaponCell(String weaponType, int damage) {
+    public WeaponCell(Weapon weapon) {
         super(CaseType.WEAPON);
-        this.damage = damage;
-        this.weaponType = weaponType;
-        this.description = weaponType + ": " + damage + " dégâts).";
-    }
-
-    // Getters
-    public int getDamage() {
-        return damage;
-    }
-
-    public String getWeaponType() {
-        return weaponType;
-    }
-
-    // Setters
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    public void setWeaponType(String weaponType) {
-        this.weaponType = weaponType;
+        this.weapon = weapon;
+        this.isTaken = false;
         updateDescription();
-    }
-
-    private void updateDescription() {
-        this.description = weaponType + ": " + damage + " dégâts).";
     }
 
     @Override
     public String interact() {
-        return "Vous ramassez un(e)" + weaponType + " qui inflige " + damage + " points de dégâts !";
+        if (isTaken) {
+            return "Ce trésor a déjà été pris.";
+        }
+        return "Trésor trouvé! Vous ramassez un(e)" + weapon.getName().toLowerCase() + " qui inflige " + weapon.getAttackLevel() + " points de dégâts !";
+    }
+
+    public Weapon takeWeapon() {
+        if (!isTaken) {
+            this.isTaken = true;
+            emptyCell();
+            return weapon;
+        }
+        return null;
+    }
+
+    private void updateDescription() {
+        if (isTaken) {
+            this.description = "Emplacement d'arme vide.";
+        } else {
+            this.description = weapon.toString();
+        }
+    }
+
+    // Getters
+    public Weapon getWeapon() { return weapon; }
+    public String getWeaponName() { return weapon != null ? weapon.getName() : "Aucune arme"; }
+    public int getDamage() { return weapon != null ? weapon.getAttackLevel() : 0; }
+    public boolean isTaken() { return isTaken; }
+
+    // Setters
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+        updateDescription();
     }
 }

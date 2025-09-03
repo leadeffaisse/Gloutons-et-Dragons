@@ -1,57 +1,52 @@
 package fr.campus.cells;
 
+import fr.campus.equipments.Potion;
+
 public class PotionCell extends Cell{
-    private int healthPoints;
-    private String potionType;
-    private String effect;
+    private Potion potion;
+    private boolean isUsed;
 
-    public PotionCell(int healthPoints) {
-        this(healthPoints, "Potion de soin", "Restaure les points de vie");
-    }
-
-    public PotionCell(int healthPoints, String potionType, String effect) {
+    public PotionCell(Potion potion) {
         super(CaseType.POTION);
-        this.healthPoints = healthPoints;
-        this.potionType = potionType;
-        this.effect = effect;
-        this.description = potionType + ": " + " (+" + healthPoints + " PV) - " + effect;
-    }
-
-    // Getters
-    public int getHealthPoints() {
-        return healthPoints;
-    }
-
-    public String getWeaponType() {
-        return potionType;
-    }
-
-    public String getEffect() {
-        return effect;
-    }
-
-    // Setters
-    public void setHealthPoints(int healthPoints) {
-        this.healthPoints = healthPoints;
+        this.potion = potion;
+        this.isUsed = false;
         updateDescription();
-    }
-
-    public void setPotionType(String potionType) {
-        this.potionType = potionType;
-        updateDescription();
-    }
-
-    public void setEffect(String effect) {
-        this.effect = effect;
-        updateDescription();
-    }
-
-    private void updateDescription() {
-        this.description = potionType + ": " +  " (+" + healthPoints + " dégâts).";
     }
 
     @Override
     public String interact() {
-        return "Vous buvez la " + potionType.toLowerCase() + " et récupérez " + healthPoints + " points de vie !";
+        if (isUsed) {
+            return "Cette potion a déjà été utilisée.";
+        }
+        return "Vous trouvez une " + potion.getName().toLowerCase() + " qui restaure " + potion.getDefenseLevel() + " points de vie !";
+    }
+
+    public Potion usePotion() {
+        if (!isUsed) {
+            this.isUsed = true;
+            emptyCell();
+            return potion;
+        }
+        return null;
+    }
+
+    private void updateDescription() {
+        if (isUsed) {
+            this.description = "Flacon de potion vide.";
+        } else {
+            this.description = potion.toString();
+        }
+    }
+
+    // Getters
+    public Potion getPotion() { return potion; }
+    public String getPotionName() { return potion != null ? potion.getName() : "Aucune potion."; }
+    public int getHealthPoints() { return potion != null ? potion.getDefenseLevel() : 0; }
+    public boolean isUsed() { return isUsed; }
+
+    // Setters
+    public void setPotion(Potion potion) {
+        this.potion = potion;
+        updateDescription();
     }
 }

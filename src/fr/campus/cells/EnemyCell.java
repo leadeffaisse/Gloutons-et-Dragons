@@ -97,8 +97,8 @@ public class EnemyCell extends Cell{
     @Override
     public String interact() {
         if (!isAlive) {
-            return enemyType + " est mort.";
+            return "Vous trouvez un " + enemyType + " mort.";
         }
-        return "Vous rencontrez " + enemyType + " ! Préparez-vous au combat !";
+        return "Vous rencontrez un " + enemyType + " ! Préparez-vous au combat !";
     }
 }

@@ -20,6 +20,7 @@ public class Cell {
     public CaseType getType() {
         return type;
     }
+
     public void setType(CaseType type) {
         this.type = type;
         this.isOccupied = (type != CaseType.EMPTY);
@@ -42,8 +43,8 @@ public class Cell {
     // Méthodes utiles
     private String generateDescription(CaseType type) {
         return switch (type) {
-            case EMPTY ->  "Case vide";
-            case ENEMY ->  "Ennemi présent";
+            case EMPTY ->  "La case est vide.";
+            case ENEMY ->  "Un ennemi est présent.";
             case WEAPON -> "Arme disponible";
             case POTION -> "Potion de soin";
         };
@@ -56,7 +57,7 @@ public class Cell {
     }
 
     public String interact() {
-        return "Aucune interaction possible avec cette case.";
+        return "Rien ne se passe.";
     }
 
     @Override
