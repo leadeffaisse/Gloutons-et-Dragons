@@ -12,6 +12,8 @@ public class Warrior extends Character {
 		  this.health = 10;
           this.maxHealth = 10;
 		  this.attackPoints = 5;
+
+          saveInitialStats();
     }
 
 	 @Override

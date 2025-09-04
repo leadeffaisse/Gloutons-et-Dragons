@@ -14,6 +14,8 @@ public class Wizard extends Character {
 		  this.health = 6;
           this.maxHealth = 6;
 		  this.attackPoints = 5;
+
+          saveInitialStats();
     }
 
 	 @Override

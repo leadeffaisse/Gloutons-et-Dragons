@@ -180,7 +180,16 @@ public class Game {
     }
 
     public void resetGame() {
+        displayMessage("Réinitialisation du jeu...");
         this.playerPosition = 1;
+
+        if (player != null) {
+            player.resetStats();
+        }
+
+        this.board.clear();
+        generateBoard();
+        displayMessage("Le jeu a été réinitialisé.");
     }
 
 

@@ -6,6 +6,12 @@ import static fr.campus.Menu.displayMessage;
 
 public abstract class Character {
     protected String name;
+    protected int initialMaxHealth;
+    protected int initialHealth;
+    protected int initialLevel;
+    protected int initialAttackPoints;
+    protected int initialDefense;
+
     protected int maxHealth;
     protected int health;
     protected int level;
@@ -30,6 +36,22 @@ public abstract class Character {
     public abstract void applyLevelBonus();
 
     // ===== Méthodes =====
+    protected void saveInitialStats() {
+        this.initialMaxHealth = this.maxHealth;
+        this.initialHealth = this.health;
+        this.initialLevel = this.level;
+        this.initialAttackPoints = this.attackPoints;
+        this.initialDefense = this.defense;
+    }
+
+    public void resetStats() {
+        this.maxHealth = this.initialMaxHealth;
+        this.health = this.initialHealth;
+        this.level = this.initialLevel;
+        this.attackPoints = this.initialAttackPoints;
+        this.defense = this.initialDefense;
+        initializeEquipment();
+    }
 
     public void levelUp() {
         this.level++;
