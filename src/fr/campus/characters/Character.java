@@ -1,7 +1,7 @@
 package fr.campus.characters;
 
-import fr.campus.equipments.OffensiveEquipment;
-import fr.campus.equipments.DefensiveEquipment;
+import fr.campus.equipments.offensiveEquipments.OffensiveEquipment;
+import fr.campus.equipments.defensiveEquipments.DefensiveEquipment;
 import static fr.campus.Menu.displayMessage;
 
 public abstract class Character {
@@ -85,7 +85,7 @@ public abstract class Character {
 
 
     public int getTotalAttack() {
-       int equipmentAttack = (offensiveEquipment != null) ? offensiveEquipment.getAttackLevel() : 0;
+       int equipmentAttack = (offensiveEquipment != null) ? offensiveEquipment.getAttackBonus() : 0;
        return this.attackPoints + equipmentAttack;
     }
 

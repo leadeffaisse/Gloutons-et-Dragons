@@ -1,6 +1,6 @@
 package fr.campus.cells;
 
-import fr.campus.equipments.Potion;
+import fr.campus.equipments.defensiveEquipments.Potion;
 
 public class PotionCell extends Cell{
     private Potion potion;

@@ -5,8 +5,8 @@ import fr.campus.cells.EnemyCell;
 import fr.campus.cells.PotionCell;
 import fr.campus.cells.WeaponCell;
 import fr.campus.characters.Character;
-import fr.campus.equipments.Potion;
-import fr.campus.equipments.Weapon;
+import fr.campus.equipments.defensiveEquipments.Potion;
+import fr.campus.equipments.offensiveEquipments.Weapon;
 
 import java.util.Random;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package fr.campus.equipments;
+package fr.campus.equipments.defensiveEquipments;
 
 public class Potion extends DefensiveEquipment {
     public Potion(String name, int defenseLevel) {

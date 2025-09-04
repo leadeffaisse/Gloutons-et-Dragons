@@ -1,7 +1,7 @@
 package fr.campus.characters;
 
-import fr.campus.equipments.Shield;
-import fr.campus.equipments.Weapon;
+import fr.campus.equipments.defensiveEquipments.Shield;
+import fr.campus.equipments.offensiveEquipments.Weapon;
 
 import static fr.campus.Menu.displayMessage;
 

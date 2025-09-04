@@ -1,4 +1,4 @@
-package fr.campus.equipments;
+package fr.campus.equipments.defensiveEquipments;
 
 public class Shield extends DefensiveEquipment {
     public Shield(String name, int defenseLevel) {

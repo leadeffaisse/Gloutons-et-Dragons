@@ -1,4 +1,4 @@
-package fr.campus.equipments;
+package fr.campus.equipments.defensiveEquipments;
 
 public class DefensiveEquipment { // Shield ou Potion
     protected String name;

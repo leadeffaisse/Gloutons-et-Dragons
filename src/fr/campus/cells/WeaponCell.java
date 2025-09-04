@@ -1,6 +1,6 @@
 package fr.campus.cells;
 
-import fr.campus.equipments.Weapon;
+import fr.campus.equipments.offensiveEquipments.Weapon;
 
 public class WeaponCell extends Cell {
     private Weapon weapon;
@@ -18,7 +18,7 @@ public class WeaponCell extends Cell {
         if (isTaken) {
             return "Ce trésor a déjà été pris.";
         }
-        return "Trésor trouvé! Vous ramassez un(e)" + weapon.getName().toLowerCase() + " qui inflige " + weapon.getAttackLevel() + " points de dégâts !";
+        return "Trésor trouvé! Vous ramassez un(e)" + weapon.getName().toLowerCase() + " qui inflige " + weapon.getAttackBonus() + " points de dégâts !";
     }
 
     public Weapon takeWeapon() {
@@ -41,7 +41,7 @@ public class WeaponCell extends Cell {
     // Getters
     public Weapon getWeapon() { return weapon; }
     public String getWeaponName() { return weapon != null ? weapon.getName() : "Aucune arme"; }
-    public int getDamage() { return weapon != null ? weapon.getAttackLevel() : 0; }
+    public int getDamage() { return weapon != null ? weapon.getAttackBonus() : 0; }
     public boolean isTaken() { return isTaken; }
 
     // Setters
