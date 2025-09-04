@@ -120,7 +120,7 @@ public class Game {
             playerPosition = BOARD_SIZE;
         }
 
-        displayMessage(player.getName() + "se déplace à la case " + playerPosition);
+        displayMessage(player.getName() + " se déplace à la case " + playerPosition);
         interactWithCell(playerPosition);
     }
 
@@ -150,7 +150,7 @@ public class Game {
                         enemyCell.getMaxHealthPoints() + " PV.");
 
                 int enemyDamage = enemyCell.attack();
-                displayMessage(enemyCell.getEnemyType() + " vous attaque et inflige " + enemyDamage + " dégâtes !");
+                displayMessage(enemyCell.getEnemyType() + " vous attaque et inflige " + enemyDamage + " dégâts !");
                 player.sufferDamage(enemyDamage);
             } else {
                 displayMessage("Vous avez vaincu l'ennemi !");
@@ -166,13 +166,13 @@ public class Game {
     }
 
     private void handlePotionCell(PotionCell potionCell) {
+        Potion potion = potionCell.takePotion();
         displayMessage("Vous utilisez la potion.");
-        int oldHealth = player.getHealth();
-        player.heal(potionCell.getHealthPoints());
-        int newHealth = player.getHealth();
-
-        displayMessage("Vous récupérez " + (newHealth - oldHealth) + " PV !");
-        displayMessage("PV actuels : " + newHealth);
+        if (potion != null) {
+            int healing = player.heal(potionCell.getHealthPoints());
+            displayMessage("Vous récupérez " + healing + " PV !");
+            displayMessage("PV actuels : " + player.getHealth() + "/" + player.getMaxHealth());
+        }
     }
 
     private int rollDice() {

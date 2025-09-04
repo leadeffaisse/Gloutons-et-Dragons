@@ -10,6 +10,7 @@ public class Warrior extends Character {
     public Warrior(String name) {
         super(name);
 		  this.health = 10;
+          this.maxHealth = 10;
 		  this.attackPoints = 5;
     }
 
@@ -27,7 +28,7 @@ public class Warrior extends Character {
 	
 	 @Override
 	 public void applyLevelBonus() {
-	 this.health += 5;
+	 this.maxHealth += 5;
 	 this.attackPoints +=2;
 	 this.defense += 1;
 	 displayMessage("Bonus de montée de niveau : +5 PV, +2 attaque, +1 défense");
@@ -38,6 +39,6 @@ public class Warrior extends Character {
 	 // 
 	 @Override
 	 public String toString() {
-	 return "Personnage : " + name + ", niveau de vie : " + health + ", attaque : " + attackPoints + ", défense : " + defense + "niveau : " + level + ", équipement : " + (offensiveEquipment != null ? offensiveEquipment.getName() : "Aucun") + (defensiveEquipment != null ? defensiveEquipment.getName() : "Aucun");
+	 return "Personnage : " + name + ", niveau de vie : " + health + ", attaque : " + attackPoints + ", défense : " + defense + ", niveau : " + level + ", équipement : " + (offensiveEquipment != null ? offensiveEquipment.getName() : "Aucun") + " / " + (defensiveEquipment != null ? defensiveEquipment.getName() : "Aucun");
 	}
 }

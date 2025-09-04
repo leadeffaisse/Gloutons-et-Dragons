@@ -2,6 +2,8 @@ package fr.campus;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;
+
+import fr.campus.cells.EnemyCell;
 import fr.campus.characters.Character;
 import fr.campus.characters.Warrior;
 import fr.campus.characters.Wizard;

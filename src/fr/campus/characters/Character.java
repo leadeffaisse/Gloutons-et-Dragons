@@ -6,6 +6,7 @@ import static fr.campus.Menu.displayMessage;
 
 public abstract class Character {
     protected String name;
+    protected int maxHealth;
     protected int health;
     protected int level;
     protected int attackPoints;
@@ -50,8 +51,12 @@ public abstract class Character {
     }
 
     public int heal(int potion) {
-        this.health += potion;
-        return potion;
+        int oldHealth = health;
+        int newHealth = Math.min(health + potion, maxHealth);
+        int actualHealing = newHealth - oldHealth;
+        this.health = newHealth;
+        displayMessage(name + " utilise une potion et récupère " + potion + " PV. PV actuels : " + health);
+        return actualHealing;
     }
 
     // ===== GETTERS ET SETTERS =====
@@ -74,6 +79,7 @@ public abstract class Character {
 
     //Getters
     public String getName() { return name; }
+    public int getMaxHealth() { return maxHealth; }
     public int getHealth() { return health; }
     public int getLevel() { return level; }
     public int getAttackPoints() { return attackPoints; }
@@ -83,9 +89,20 @@ public abstract class Character {
 
     //Setters
     public void setName(String name) { this.name = name; }
+    protected void setMaxHealth(int maxHealth) {
+        if (maxHealth > 0) {
+            this.maxHealth = maxHealth;
+
+            if (this.health > maxHealth) {
+                this.health = maxHealth;
+            }
+        }
+    }
 
     public void setHealth(int health) {
-        if (health >= 0) this.health = health;
+        if (health >= 0) {
+            this.health = Math.min(health, maxHealth);
+        }
     }
 
     public void setLevel(int level) {

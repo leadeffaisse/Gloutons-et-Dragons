@@ -21,7 +21,7 @@ public class PotionCell extends Cell{
         return "Vous trouvez une " + potion.getName().toLowerCase() + " qui restaure " + potion.getDefenseLevel() + " points de vie !";
     }
 
-    public Potion usePotion() {
+    public Potion takePotion() {
         if (!isUsed) {
             this.isUsed = true;
             emptyCell();

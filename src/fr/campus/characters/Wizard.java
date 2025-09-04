@@ -12,6 +12,7 @@ public class Wizard extends Character {
     public Wizard(String name) {
         super(name);
 		  this.health = 6;
+          this.maxHealth = 6;
 		  this.attackPoints = 5;
     }
 
@@ -29,7 +30,7 @@ public class Wizard extends Character {
 	
 	 @Override
 	 public void applyLevelBonus() {
-	 this.health += 3;
+	 this.maxHealth += 3;
 	 this.attackPoints +=4;
 	 this.defense += 1;
 	 displayMessage("Bonus de montée de niveau : +3 PV, +4 attaque, +1 défense");
