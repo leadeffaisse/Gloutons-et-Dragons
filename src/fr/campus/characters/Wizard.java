@@ -21,7 +21,7 @@ public class Wizard extends Character {
 	 @Override
 	 public void initializeEquipment() {
 	 this.offensiveEquipment = new Spell("Baguette");
-	 this.defensiveEquipment = new Potion("Potion", 2);
+	 this.defensiveEquipment = new Potion("Potion");
 	 }
 	
 	 @Override

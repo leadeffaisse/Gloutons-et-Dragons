@@ -60,7 +60,7 @@ public abstract class Character {
     }
 
     public void sufferDamage(int damage) {
-        int equipmentDefense = (defensiveEquipment != null) ? defensiveEquipment.getDefenseLevel() : 0;
+        int equipmentDefense = (defensiveEquipment != null) ? defensiveEquipment.getDefenseBonus() : 0;
         int totalDefense = equipmentDefense + getDefense();
         int realDamage = Math.max(0, damage - totalDefense);
 

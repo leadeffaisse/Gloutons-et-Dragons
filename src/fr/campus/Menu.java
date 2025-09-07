@@ -90,7 +90,7 @@ public class Menu {
             }
         }
 
-        displayMessage("Veuillez choisir l'un des classes suivantes : ");
+        displayMessage("Veuillez choisir l'une des classes suivantes : ");
         displayMessage("1. Guerrier");
         displayMessage("2. Mage");
 

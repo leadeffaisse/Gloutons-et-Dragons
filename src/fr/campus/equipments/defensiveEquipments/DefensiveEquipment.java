@@ -2,20 +2,20 @@ package fr.campus.equipments.defensiveEquipments;
 
 public class DefensiveEquipment { // Shield ou Potion
     protected String name;
-    protected int defenseLevel;
+    protected int defenseBonus;
 
     // Constructeurs, getters, setters, toString
-    public DefensiveEquipment(String name, int defenseLevel) {
+    public DefensiveEquipment(String name) {
         this.name = name;
-        this.defenseLevel = defenseLevel;
+        this.defenseBonus = 2;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getDefenseLevel() {
-        return defenseLevel;
+    public int getDefenseBonus() {
+        return defenseBonus;
     }
 
     public void setName(String name) {
@@ -24,9 +24,9 @@ public class DefensiveEquipment { // Shield ou Potion
         }
     }
 
-    public void setDefenseLevel(int defenseLevel) {
-        if (defenseLevel >= 0) {
-            this.defenseLevel = defenseLevel;
+    public void setDefenseBonus(int defenseBonus) {
+        if (defenseBonus >= 0) {
+            this.defenseBonus = defenseBonus;
         }
     }
 }

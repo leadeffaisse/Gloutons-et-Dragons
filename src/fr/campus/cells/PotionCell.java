@@ -18,7 +18,7 @@ public class PotionCell extends Cell{
         if (isUsed) {
             return "Cette potion a déjà été utilisée.";
         }
-        return "Vous trouvez une " + potion.getName().toLowerCase() + " qui restaure " + potion.getDefenseLevel() + " points de vie !";
+        return "Vous trouvez une " + potion.getName().toLowerCase() + " qui restaure " + potion.getDefenseBonus() + " points de vie !";
     }
 
     public Potion takePotion() {
@@ -41,7 +41,7 @@ public class PotionCell extends Cell{
     // Getters
     public Potion getPotion() { return potion; }
     public String getPotionName() { return potion != null ? potion.getName() : "Aucune potion."; }
-    public int getHealthPoints() { return potion != null ? potion.getDefenseLevel() : 0; }
+    public int getHealthPoints() { return potion != null ? potion.getDefenseBonus() : 0; }
     public boolean isUsed() { return isUsed; }
 
     // Setters

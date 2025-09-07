@@ -68,9 +68,8 @@ public class Game {
     private WeaponCell createWeaponCell() {
         String[] weaponNames = {"épée", "hâche", "marteau", "arc", "lance"};
         String weaponName = weaponNames[dice.nextInt(weaponNames.length)];
-        int damage = 2 + dice.nextInt(6);
 
-        Weapon weapon = new Weapon(weaponName, damage);
+        Weapon weapon = new Weapon(weaponName);
 
         return new WeaponCell(weapon);
     }
@@ -80,7 +79,7 @@ public class Game {
         String potionName = potionNames[dice.nextInt(potionNames.length)];
         int healing = 3 + dice.nextInt(8);
 
-        Potion potion = new Potion(potionName, healing);
+        Potion potion = new Potion(potionName);
 
         return new PotionCell(potion);
     }
