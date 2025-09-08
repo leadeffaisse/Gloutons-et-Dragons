@@ -1,6 +1,7 @@
 package fr.campus.characters;
 
 import fr.campus.equipments.defensiveEquipments.Shield;
+import fr.campus.equipments.offensiveEquipments.Mace;
 import fr.campus.equipments.offensiveEquipments.Weapon;
 
 import static fr.campus.Menu.displayMessage;
@@ -18,8 +19,8 @@ public class Warrior extends Character {
 
 	 @Override
 	 public void initializeEquipment() {
-	 this.offensiveEquipment = new Weapon("Épée", 5);
-	 this.defensiveEquipment = new Shield("Bouclier", 3);
+	 this.offensiveEquipment = new Mace("Massue");
+	 this.defensiveEquipment = new Shield("Bouclier");
 	 }
 	
 	 @Override

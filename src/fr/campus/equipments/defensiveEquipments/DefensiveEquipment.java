@@ -4,10 +4,10 @@ public class DefensiveEquipment { // Shield ou Potion
     protected String name;
     protected int defenseBonus;
 
-    // Constructeurs, getters, setters, toString
+    // Constructeurs
     public DefensiveEquipment(String name) {
         this.name = name;
-        this.defenseBonus = 2;
+        this.defenseBonus = 3; // Valeur par défaut
     }
 
     public String getName() {

@@ -2,6 +2,8 @@ package fr.campus.characters;
 
 
 import fr.campus.equipments.defensiveEquipments.Potion;
+import fr.campus.equipments.defensiveEquipments.StandardPotion;
+import fr.campus.equipments.offensiveEquipments.Lightning;
 import fr.campus.equipments.offensiveEquipments.Spell;
 
 import static fr.campus.Menu.displayMessage;
@@ -20,8 +22,8 @@ public class Wizard extends Character {
 
 	 @Override
 	 public void initializeEquipment() {
-	 this.offensiveEquipment = new Spell("Baguette");
-	 this.defensiveEquipment = new Potion("Potion");
+	 this.offensiveEquipment = new Lightning("Eclair");
+	 this.defensiveEquipment = new StandardPotion("Potion standard");
 	 }
 	
 	 @Override

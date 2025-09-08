@@ -8,6 +8,7 @@ import fr.campus.characters.Character;
 import fr.campus.equipments.defensiveEquipments.Potion;
 import fr.campus.equipments.offensiveEquipments.Weapon;
 
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class Game {
     private Character player;
     private int playerPosition;
     private final Random dice;
-    private ArrayList<Cell> board;
+    private List<Cell> board;
     private final int BOARD_SIZE = 64;
 
     public Game() {
