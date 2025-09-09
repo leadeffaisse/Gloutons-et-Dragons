@@ -25,7 +25,7 @@ public class Warrior extends Character {
 	
 	 @Override
 	 public void attack() {
-	 displayMessage(name + " attaque avec son épée !");
+	 displayMessage(super.getName() + " attaque avec son épée !");
 	 displayMessage("Dégâts infligés : " + getTotalAttack());
 	 }
 	
@@ -42,6 +42,6 @@ public class Warrior extends Character {
 	 // 
 	 @Override
 	 public String toString() {
-	 return "Personnage : " + name + ", niveau de vie : " + health + ", attaque : " + attackPoints + ", défense : " + defense + ", niveau : " + level + ", équipement : " + (offensiveEquipment != null ? offensiveEquipment.getName() : "Aucun") + " / " + (defensiveEquipment != null ? defensiveEquipment.getName() : "Aucun");
+	 return "Personnage : " + super.getName() + ", niveau de vie : " + health + ", attaque : " + attackPoints + ", défense : " + defense + ", niveau : " + level + ", équipement : " + (offensiveEquipment != null ? offensiveEquipment.getName() : "Aucun") + " / " + (defensiveEquipment != null ? defensiveEquipment.getName() : "Aucun");
 	}
 }

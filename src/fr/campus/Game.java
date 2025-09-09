@@ -5,6 +5,7 @@ import fr.campus.cells.EnemyCell;
 import fr.campus.cells.PotionCell;
 import fr.campus.cells.WeaponCell;
 import fr.campus.characters.Character;
+import fr.campus.dices.StandardDice;
 import fr.campus.equipments.defensiveEquipments.Potion;
 import fr.campus.equipments.offensiveEquipments.Weapon;
 
@@ -17,13 +18,13 @@ import static fr.campus.Menu.displayMessage;
 public class Game {
     private Character player;
     private int playerPosition;
-    private final Random dice;
+    private final StandardDice dice;
     private List<Cell> board;
     private final int BOARD_SIZE = 64;
 
     public Game() {
         this.playerPosition = 1;
-        this.dice = new Random();
+        this.dice = new StandardDice(6);
         this.board = new ArrayList<>();
         generateBoard();
     }
@@ -42,12 +43,13 @@ public class Game {
     }
 
     private Cell generateCell() {
-        int randomValue = dice.nextInt(100);
-        if (randomValue < 50) {
+        StandardDice randomValue = new StandardDice(100);
+        int result = randomValue.roll();
+        if (result < 50) {
             return new Cell(); // créer une case vide
-        } else if (randomValue < 75) {
+        } else if (result < 75) {
             return createEnemyCell();
-        } else if (randomValue < 90) {
+        } else if (result < 90) {
             return createWeaponCell();
         } else {
             return createPotionCell();
@@ -173,10 +175,6 @@ public class Game {
             displayMessage("Vous récupérez " + healing + " PV !");
             displayMessage("PV actuels : " + player.getHealth() + "/" + player.getMaxHealth());
         }
-    }
-
-    private int rollDice() {
-        return dice.nextInt(6) + 1;
     }
 
     public void resetGame() {

@@ -5,7 +5,7 @@ import fr.campus.equipments.defensiveEquipments.DefensiveEquipment;
 import static fr.campus.Menu.displayMessage;
 
 public abstract class Character {
-    protected String name;
+    private String name;
     protected int initialMaxHealth;
     protected int initialHealth;
     protected int initialLevel;
